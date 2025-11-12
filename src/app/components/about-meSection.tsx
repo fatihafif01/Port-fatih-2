@@ -3,7 +3,12 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function AboutMeSection({ scrollToSection }) {
+// Tambahkan tipe props supaya TypeScript tidak error saat build
+type AboutMeSectionProps = {
+  scrollToSection?: (id: string) => void;
+};
+
+export default function AboutMeSection({ scrollToSection }: AboutMeSectionProps) {
   return (
     <section className="min-h-screen bg-cyan-300 flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6 py-20">

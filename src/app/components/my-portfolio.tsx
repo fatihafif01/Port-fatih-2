@@ -3,13 +3,16 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function MyPortfolio({ scrollToSection }) {
+// Tambahkan tipe props
+type MyPortfolioProps = {
+  scrollToSection?: (id: string) => void;
+};
+
+export default function MyPortfolio({ scrollToSection }: MyPortfolioProps) {
   return (
     <div className="min-h-screen bg-amber-400 flex flex-col justify-center">
-      {/* About Me Section */}
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          
           {/* 🟢 Kiri: Gambar lingkaran + animasi hover */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

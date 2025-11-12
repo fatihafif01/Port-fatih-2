@@ -4,7 +4,12 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function MyExperience({ scrollToSection }) {
+// Tambahkan tipe props supaya TypeScript tidak error
+type MyExperienceProps = {
+  scrollToSection?: (id: string) => void;
+};
+
+export default function MyExperience({ scrollToSection }: MyExperienceProps) {
   const experiences = [
     {
       src: "/Gambar-experience-1.png",
@@ -30,69 +35,66 @@ export default function MyExperience({ scrollToSection }) {
   }, [experiences.length]);
 
   return (
-    <div className="min-h-screen bg-indigo-300 flex flex-col justify-center pt-16">
-      {/* 🔹 Konten Utama */}
-      <main className="px-6 py-4">
-        <section className="max-w-5xl mx-auto text-center">
-          {/* Judul */}
-          <motion.h2
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl md:text-5xl font-extrabold mb-8 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 bg-clip-text text-transparent tracking-wide drop-shadow-sm"
-          >
-            MY EXPERIENCE
-          </motion.h2>
+    <section className="min-h-screen bg-indigo-300 flex flex-col justify-center pt-16">
+      <div className="px-6 py-4 max-w-5xl mx-auto text-center">
+        {/* Judul */}
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-4xl md:text-5xl font-extrabold mb-8 text-gray-900 tracking-wide drop-shadow-sm"
+        >
+          MY EXPERIENCE
+        </motion.h2>
 
-          {/* 🔹 Card Container */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-            className="border border-gray-200 bg-white/60 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-500 max-w-3xl mx-auto"
-          >
-            {/* 🔹 Gambar Otomatis dengan Animasi */}
-            <div className="relative w-full h-64 flex justify-center items-center bg-gray-100 rounded-b-2xl overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentIndex}
-                  initial={{ opacity: 0, x: 60 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -60 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className="absolute"
-                >
-                  <Image
-                    src={experiences[currentIndex].src}
-                    alt="Experience Showcase"
-                    width={800}
-                    height={400}
-                    className="rounded-xl object-cover"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* 🔹 Deskripsi Dinamis Modern */}
+        {/* Card Container */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+          className="border border-gray-200 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-500 max-w-3xl mx-auto"
+        >
+          {/* Gambar Otomatis */}
+          <div className="relative w-full h-64 flex justify-center items-center bg-gray-100 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentIndex + "-text"}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100 text-center rounded-b-2xl flex items-center justify-center"
+                key={currentIndex}
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                className="absolute w-full h-full"
               >
-                <p className="text-gray-700 text-lg leading-relaxed font-medium tracking-wide italic">
-                  {experiences[currentIndex].text}
-                </p>
+                <Image
+                  src={experiences[currentIndex].src}
+                  alt="Experience Showcase"
+                  width={800}
+                  height={400}
+                  className="object-cover w-full h-full rounded-xl"
+                />
               </motion.div>
             </AnimatePresence>
-          </motion.div>
-        </section>
-      </main>
-    </div>
+          </div>
+
+          {/* Deskripsi */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex + "-text"}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="px-6 py-4 bg-white text-center flex items-center justify-center"
+            >
+              <p className="text-gray-700 text-lg leading-relaxed font-medium tracking-wide italic">
+                {experiences[currentIndex].text}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
   );
 }
