@@ -3,13 +3,9 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ScrollProps } from "./types"; // <- import dari file tipe, bukan page
 
-// Tambahkan tipe props supaya TypeScript tidak error
-type MyExperienceProps = {
-  scrollToSection?: (id: string) => void;
-};
-
-export default function MyExperience({ scrollToSection }: MyExperienceProps) {
+export default function MyExperience({ scrollToSection }: ScrollProps) {
   const experiences = [
     {
       src: "/Gambar-experience-1.png",
@@ -37,7 +33,6 @@ export default function MyExperience({ scrollToSection }: MyExperienceProps) {
   return (
     <section className="min-h-screen bg-indigo-300 flex flex-col justify-center pt-16">
       <div className="px-6 py-4 max-w-5xl mx-auto text-center">
-        {/* Judul */}
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +43,6 @@ export default function MyExperience({ scrollToSection }: MyExperienceProps) {
           MY EXPERIENCE
         </motion.h2>
 
-        {/* Card Container */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -56,7 +50,6 @@ export default function MyExperience({ scrollToSection }: MyExperienceProps) {
           transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
           className="border border-gray-200 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-500 max-w-3xl mx-auto"
         >
-          {/* Gambar Otomatis */}
           <div className="relative w-full h-64 flex justify-center items-center bg-gray-100 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
@@ -78,7 +71,6 @@ export default function MyExperience({ scrollToSection }: MyExperienceProps) {
             </AnimatePresence>
           </div>
 
-          {/* Deskripsi */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex + "-text"}

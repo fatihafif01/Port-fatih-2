@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { Mail, Github, Linkedin } from "lucide-react";
 import axios from "axios";
+import { ScrollProps } from "../page"; 
 
-export default function Contacts() {
+// ✅ Tambahkan prop scrollToSection ke parameter komponen
+export default function Contacts({ scrollToSection }: ScrollProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -127,28 +129,28 @@ export default function Contacts() {
 
       {/* Sosial Media */}
       <div className="flex justify-center gap-8 mt-12">
-        <a
+        
           href="mailto:your-email@example.com"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-indigo-500 transition"
-        >
+        <a>
           <Mail className="w-8 h-8" />
         </a>
-        <a
+        
           href="https://github.com/username"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-indigo-500 transition"
-        >
+        <a>
           <Github className="w-8 h-8" />
         </a>
-        <a
+        
           href="https://www.linkedin.com/in/username"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-indigo-500 transition"
-        >
+        <a>
           <Linkedin className="w-8 h-8" />
         </a>
       </div>

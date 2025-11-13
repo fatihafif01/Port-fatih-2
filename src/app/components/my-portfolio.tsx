@@ -2,13 +2,9 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ScrollProps } from "../page";
 
-// Tambahkan tipe props
-type MyPortfolioProps = {
-  scrollToSection?: (id: string) => void;
-};
-
-export default function MyPortfolio({ scrollToSection }: MyPortfolioProps) {
+export default function MyPortfolio({ scrollToSection }: ScrollProps) {
   return (
     <div className="min-h-screen bg-amber-400 flex flex-col justify-center">
       <section className="max-w-7xl mx-auto px-6 py-16">
@@ -64,7 +60,7 @@ export default function MyPortfolio({ scrollToSection }: MyPortfolioProps) {
               whileHover={{ scale: 1.05, backgroundColor: "#e5e7eb" }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeInOut" }}
-              onClick={() => scrollToSection && scrollToSection("skills")}
+              onClick={() => scrollToSection("skills")} // sesuaikan dengan ID section
               className="px-6 py-2.5 bg-gray-200 text-gray-900 text-sm font-medium rounded shadow-sm hover:shadow-sm transition"
             >
               My Skill

@@ -3,8 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { ScrollProps } from "../page"; 
 
-export default function Skill() {
+export default function MySkill({ scrollToSection }: ScrollProps) {
   const skillIcons = [
     "/gambar-skill-2.png",
     "/gambar-skill-3.jpeg",

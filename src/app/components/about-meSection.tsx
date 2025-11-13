@@ -1,53 +1,38 @@
-"use client";
+import Image from 'next/image';
+import { Mail, Github, Linkedin } from 'lucide-react';
+import { ScrollProps } from "../page";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
-
-// Tambahkan tipe props supaya TypeScript tidak error saat build
-type AboutMeSectionProps = {
-  scrollToSection?: (id: string) => void;
-};
-
-export default function AboutMeSection({ scrollToSection }: AboutMeSectionProps) {
+// ✅ Tambahkan prop scrollToSection
+export default function AboutMe({ scrollToSection }: ScrollProps) {
   return (
-    <section className="min-h-screen bg-cyan-300 flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto px-6 py-20">
+    <div className="min-h-screen bg-white flex flex-col justify-between">
+
+      {/* About Me Section */}
+      <section className="max-w-7xl mx-auto px-6 py-20 flex-1">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
-              About Me
+              About me
             </h1>
             <p className="text-gray-600 leading-relaxed mb-8">
-              I am a person with a strong interest in technology and investment. I have a never-give-up attitude and honesty. I enjoy facing new challenges, adapt quickly to change, and always strive to contribute my best at every opportunity. Furthermore, I am open to working both in teams and independently to achieve clear and impactful goals.
+              Nisl arcu, scelerisque neque ut. Tincidunt amet, tempor duis tortor neque auctor dis ipsum. 
+              Pretium cras amet odio amet eleifend id sed cras sed. Aliquet risus posuere aliquet imperdiet sit.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.15 }}
-              onClick={() => scrollToSection && scrollToSection("portfolio")}
+            {/* ✅ Tambahkan onClick handler */}
+            <button 
+              onClick={() => scrollToSection("portfolio")}
               className="px-6 py-2.5 bg-gray-200 text-gray-900 text-sm font-medium rounded hover:bg-gray-300 transition"
             >
               My Portfolio
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
 
-          {/* Right Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative flex justify-center"
-          >
-            <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden bg-gray-200 shadow-lg">
-              <Image
-                src="/gambar-portfolio-2.png"
+          {/* Right Content - Image */}
+          <div className="relative flex justify-center">
+            <div className="relative w-96 h-96 rounded-full overflow-hidden bg-gray-200">
+              <Image 
+                src="/gambar-portfolio-2.png" 
                 alt="Fatih - About Me"
                 width={500}
                 height={500}
@@ -55,9 +40,45 @@ export default function AboutMeSection({ scrollToSection }: AboutMeSectionProps)
                 priority
               />
             </div>
-          </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-100 border-t border-gray-300 py-6 mt-20">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-600 text-sm mb-4 md:mb-0">
+            © 2025 My Website. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <a 
+              href="mailto:fatih@example.com" 
+              className="text-gray-700 hover:text-blue-600 transition"
+              aria-label="Email"
+            >
+              <Mail size={22} />
+            </a>
+            <a 
+              href="https://github.com/username" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-700 hover:text-blue-600 transition"
+              aria-label="GitHub"
+            >
+              <Github size={22} />
+            </a>
+            <a 
+              href="https://linkedin.com/in/username" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-gray-700 hover:text-blue-600 transition"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={22} />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }

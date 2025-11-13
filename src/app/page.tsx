@@ -8,8 +8,12 @@ import MyExperience from "./components/my-experience";
 import TestimonialSection from "./components/testimonialSection";
 import ContacSection from "./components/contacSection";
 
+export interface ScrollProps {
+  scrollToSection: (sectionId: string) => void;
+}
+
 export default function MainPage() {
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       const navHeight = 80;
@@ -18,7 +22,7 @@ export default function MainPage() {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   };

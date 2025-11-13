@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ScrollProps } from "../page"; 
 
-export default function Testimonials() {
+export default function TestimonialSection({ scrollToSection }: ScrollProps) {
   const testimonials = [
     {
       src: "/testimoials-1.jpeg",
@@ -18,8 +19,8 @@ export default function Testimonials() {
     },
     {
       src: "/testimonials-3.jpeg",
-      text: "I recommend fatih if you want to make a front end",
-      name: "fandi siregar",
+      text: "I recommend Fatih if you want to make a front end.",
+      name: "Fandi Siregar",
     },
   ];
 
@@ -33,50 +34,49 @@ export default function Testimonials() {
   }, [testimonials.length]);
 
   return (
-    <div className="min-h-screen bg-sky-300 flex flex-col justify-between">
-      {/* Navbar tanpa background abu */}
-      <nav className="h-16 border-b border-transparent"></nav>
+    <section className="min-h-screen bg-sky-300 flex flex-col justify-between px-6 py-20">
+      <div className="max-w-5xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-16 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 bg-clip-text text-transparent tracking-wide drop-shadow-sm">
+          TESTIMONIALS
+        </h2>
 
-      <main className="px-6 py-20 flex-1">
-        <section className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-16 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 bg-clip-text text-transparent tracking-wide drop-shadow-sm">
-            TESTIMONIALS
-          </h2>
+        <div className="max-w-4xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="border border-gray-300 rounded-2xl overflow-hidden shadow-lg p-6 flex flex-col items-center gap-4 bg-white"
+            >
+              <div className="w-36 h-36 sm:w-40 sm:h-40 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg">
+                <Image
+                  src={testimonials[currentIndex].src}
+                  alt={`Testimonial ${currentIndex + 1}`}
+                  width={160}
+                  height={160}
+                  className="object-cover w-full h-full"
+                />
+              </div>
 
-          {/* Card Container */}
-          <div className="max-w-4xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="border border-gray-300 rounded-2xl overflow-hidden shadow-lg p-6 flex flex-col items-center gap-4 bg-white"
-              >
-                {/* Foto Bulat Responsif */}
-                <div className="w-36 h-36 sm:w-40 sm:h-40 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg">
-                  <Image
-                    src={testimonials[currentIndex].src}
-                    alt={`Testimonial ${currentIndex + 1}`}
-                    width={160}
-                    height={160}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
+              <p className="text-gray-700 text-lg italic">
+                "{testimonials[currentIndex].text}"
+              </p>
+              <span className="font-semibold text-gray-900">
+                - {testimonials[currentIndex].name}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-                {/* Teks Testimonial */}
-                <p className="text-gray-700 text-lg italic">
-                  "{testimonials[currentIndex].text}"
-                </p>
-                <span className="font-semibold text-gray-900">
-                  - {testimonials[currentIndex].name}
-                </span>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </section>
-      </main>
-    </div>
+        <button
+          onClick={() => scrollToSection("contacts")}
+          className="mt-8 px-6 py-2 bg-gray-200 rounded text-gray-900 hover:bg-gray-300 transition"
+        >
+          Contact Me
+        </button>
+      </div>
+    </section>
   );
 }
